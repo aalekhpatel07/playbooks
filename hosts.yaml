@@ -1,0 +1,29 @@
+all:
+  hosts:
+    beast: # In case plays are only to be run on the main developer workstation.
+      ansible_connection: local
+      become_user: root
+      become: true
+  children:
+    debian:
+      hosts:
+        pi:
+          ansible_host: 192.168.1.137 # IP of Raspberry Pi 4B (#1).
+          remote_user: admin
+          ansible_connection: ssh
+    fedora:
+      hosts:
+        server:
+          ansible_host: 192.168.1.113 # IP of Thinkstation Server (#1).
+          remote_user: admin
+          ansible_connection: ssh
+        beast:
+          ansible_connection: local
+          become_user: root
+          become: true
+    workstations:
+      hosts:
+        beast:
+          ansible_connection: local
+          become_user: root
+          become: true
