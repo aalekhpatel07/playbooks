@@ -32,13 +32,16 @@ Manage configurations and states of packages/tooling across multiple machines us
 ## Maintain
 
 - Add new playbooks and include a corresponding entry in the `main.yaml` file.
+- Lint the main playbook again: `./lint`
+- Generate execution flow graphs: `./make-graphs`
 
 ## Usage
 
-- Run the main playbook (or use the `./install` script):
+- Run the main playbook (or use the `./run-playbook` script),:
 	```sh
 	ansible-playbook --inventory-file hosts.yaml main.yaml --verbose
 	```
+- Generate execution flow graphs: `./make-graphs`
 
 ## Contributing
 
