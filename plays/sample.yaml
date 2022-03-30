@@ -1,0 +1,22 @@
+---
+- name: Update nginx in Fedora web servers
+  hosts: fedora
+  become: true # For sudo privileges.
+  become_user: root
+  remote_user: admin
+
+  tasks:
+    - name: Ensure nginx is at the latest version
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+- name: Update nginx in Debian-based distros. (Pi)
+  hosts: debian
+  remote_user: admin
+
+  tasks:
+    - name: Ensure nginx is at the latest version
+      ansible.builtin.apt:
+        name: nginx
+        state: present
