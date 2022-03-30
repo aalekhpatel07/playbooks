@@ -1,13 +1,15 @@
-
+#!/usr/bin/sh
 mkdir -p ./graphs/plays
+
+PYTHON_PATH=".venv/bin/python"
 
 # Generate graphs for each playbooks in plays/*.
 for play in $(find ./plays -maxdepth 1 -mindepth 1);
 do 
 	out_base="$(basename -s .yaml $play)"
 	echo $out_base
-	ansible-playbook-grapher "$play" --output-file-name "graphs/plays/$out_base" --inventory ./hosts.yaml "$@"
+	$PYTHON_PATH/ansible-playbook-grapher "$play" --output-file-name "graphs/plays/$out_base" --inventory ./hosts.yaml "$@"
 done
 
 # Generate main graph that runs all the playbooks.
-ansible-playbook-grapher main.yaml --output-file-name graphs/main --inventory ./hosts.yaml "$@"
+$PYTHON_PATH/ansible-playbook-grapher main.yaml --output-file-name graphs/main --inventory ./hosts.yaml "$@"
